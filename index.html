@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>color-picker • muse for designers</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#f8f4eb] text-stone-800 overflow-hidden font-sans">
+    <div class="flex h-screen">
+        <!-- SIDEBAR -->
+        <div id="sidebar" class="w-72 bg-white border-r border-stone-200 flex flex-col shadow-xl transition-all">
+            <!-- logo -->
+            <div class="px-8 pt-10 pb-8 border-b border-stone-100">
+                <div class="flex items-center gap-x-3">
+                    <div class="relative">
+                        <div class="w-8 h-8 bg-gradient-to-br from-cyan-300 to-violet-300 rounded-2xl shadow-inner flex items-center justify-center">
+                            <div class="w-4 h-4 bg-white rounded-xl rotate-45"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="text-4xl font-semibold tracking-[-3px] text-stone-900">color</span>
+                        <span class="text-4xl font-semibold tracking-[-3px] bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-violet-400">picker</span>
+                    </div>
+                </div>
+                <p class="text-stone-400 text-xs mt-1 pl-11">Discover • Inspire • Create</p>
+            </div>
+
+            <!-- nav -->
+            <div class="px-6 pt-8 flex-1 space-y-1">
+                <div onclick="navigate(0)" class="nav-link active flex items-center gap-x-3 px-5 py-[17px] text-[15px] cursor-pointer rounded-3xl hover:bg-stone-100" id="nav-0">
+                    <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    <span class="font-medium">Generator</span>
+                </div>
+                <div onclick="navigate(1)" class="nav-link flex items-center gap-x-3 px-5 py-[17px] text-[15px] cursor-pointer rounded-3xl hover:bg-stone-100" id="nav-1">
+                    <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                    <span class="font-medium">Calm Colors</span>
+                </div>
+                <div onclick="navigate(2)" class="nav-link flex items-center gap-x-3 px-5 py-[17px] text-[15px] cursor-pointer rounded-3xl hover:bg-stone-100" id="nav-2">
+                    <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                    <span class="font-medium">Manual Picker</span>
+                </div>
+                <div onclick="navigate(3)" class="nav-link flex items-center gap-x-3 px-5 py-[17px] text-[15px] cursor-pointer rounded-3xl hover:bg-stone-100" id="nav-3">
+                    <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-5l1 1m-1-1l1-1M12 3v18m-7-9h14"/></svg>
+                    <span class="font-medium">Gradients</span>
+                </div>
+            </div>
+
+            <div class="mx-6 mb-8 p-5 glass border border-stone-100 rounded-3xl text-xs">
+                <div class="flex items-center gap-x-2 text-cyan-500 mb-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    <span class="font-semibold tracking-wider text-xs">TIP</span>
+                </div>
+                <p class="text-stone-500 text-[13px] leading-tight">
+                    Every swatch has a HEX code ready to copy.
+                    Click directly on any rectangle to copy instantly.
+                </p>
+            </div>
+
+            <div class="border-t border-stone-100 p-6 text-[10px] text-stone-400 flex justify-between items-center">
+                <div>color-picker</div>
+                <div onclick="window.location.reload()" class="cursor-pointer hover:text-cyan-400 transition-colors flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    Reload
+                </div>
+            </div>
+        </div>
+        
+        <!-- MAIN -->
+        <div class="flex-1 flex flex-col light-bg overflow-hidden">
+            <!-- top bar -->
+            <div class="h-16 border-b border-stone-100 bg-white/70 backdrop-blur-lg px-8 flex items-center justify-between">
+                <div class="flex items-center gap-x-4">
+                    <div onclick="toggleSidebar()" class="cursor-pointer lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </div>
+                    <h2 id="page-title" class="text-sm font-medium text-stone-600 hidden md:block">Generator</h2>
+                </div>
+
+                <div class="flex items-center gap-x-4">
+                    <button onclick="generateNewPalette()"
+                            class="flex items-center gap-x-2 bg-stone-900 text-white text-xs font-medium shadow-sm px-5 h-9 rounded-2xl hover:bg-stone-700 transition-all active:scale-95">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        <span id="new-palette-btn-label">New Palette</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- content -->
+            <div class="flex-1 p-10 overflow-auto" id="main-content">
+
+                <!-- HOME -->
+                <div id="page-0">
+                    <div class="max-w-[1200px] mx-auto">
+                        <div class="mb-12">
+                            <div class="inline-flex items-center gap-2 bg-white text-teal-600 text-xs font-medium px-5 h-7 rounded-3xl shadow-sm">
+                                <div class="w-px h-3 bg-teal-300"></div>
+                                INSTANT PALETTES
+                            </div>
+                            <h1 class="text-7xl font-semibold tracking-tighter text-stone-900 mt-3 leading-none">Colors that inspire</h1>
+                            <p class="text-stone-500 mt-4 max-w-md text-lg">Four harmonious swatches. Click a color to copy. Modern and easy to use.</p>
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-5 max-w-[1080px]" id="home-swatches">
+                            <!-- JS populated -->
+                        </div>
+
+                        <div class="mt-20 flex items-center justify-center gap-8 text-xs text-stone-400">
+                            <div class="flex items-center gap-x-2">
+                                <div class="px-2.5 py-1 bg-white rounded-2xl text-teal-500 font-medium text-[10px]">LOCK</div>
+                                <span class="opacity-40">Lock a color</span>
+                            </div>
+                            <div class="h-3 w-px bg-stone-200"></div>
+                            <div>Click any rectangle to copy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALM COLORS -->
+                <div id="page-1" class="hidden max-w-[1200px] mx-auto">
+                    <div class="mb-10">
+                        <div class="inline px-6 py-2 text-xs bg-emerald-100 text-emerald-700 rounded-3xl">Calm & Inspiring Set</div>
+                        <h1 class="text-6xl font-semibold tracking-tighter mt-4">Calm Colors</h1>
+                        <p class="text-stone-500 mt-2">20 soft tones that bring comfort and balance. Perfect for natural and minimal designs.</p>
+                    </div>
+
+                    <div class="grid grid-cols-5 gap-6" id="calm-grid">
+                        <!-- JS populated with 20 colors -->
+                    </div>
+                </div>
+
+                <!-- MANUAL -->
+                <div id="page-2" class="hidden">
+                    <div class="max-w-[1200px] mx-auto">
+                        <div class="grid grid-cols-12 gap-8">
+                            <!-- picker column -->
+                            <div class="col-span-5">
+                                <div class="sticky top-6">
+                                    <div class="mb-8">
+                                        <div class="text-teal-500 text-sm font-medium flex items-center gap-x-3">
+                                            <span class="bg-teal-100 w-6 h-px"></span>
+                                            PICK A HUE
+                                        </div>
+                                        <h1 class="text-6xl font-semibold tracking-tighter text-balance">Pick a color and see its shades</h1>
+                                    </div>
+
+                                    <div class="glass border border-stone-100 shadow-xl rounded-3xl p-8">
+                                        <div class="flex justify-center mb-8">
+                                            <input type="color" id="manual-color" value="#67e8f9"
+                                                   class="w-60 h-60 rounded-3xl overflow-hidden cursor-pointer shadow-inner border-8 border-white">
+                                        </div>
+
+                                        <div class="flex justify-between bg-white rounded-2xl p-5 text-sm">
+                                            <div>
+                                                <div class="text-xs text-stone-400 mb-px">Selected Color</div>
+                                                <div id="picked-hex" class="font-mono text-4xl text-stone-900">#67E8F9</div>
+                                                <div class="flex gap-2 mt-2">
+                                                    <button onclick="copyPickedFormat('hex')" class="text-[10px] bg-stone-100 hover:bg-stone-200 px-2 py-1 rounded transition">HEX</button>
+                                                    <button onclick="copyPickedFormat('rgb')" class="text-[10px] bg-stone-100 hover:bg-stone-200 px-2 py-1 rounded transition">RGB</button>
+                                                    <button onclick="copyPickedFormat('hsl')" class="text-[10px] bg-stone-100 hover:bg-stone-200 px-2 py-1 rounded transition">HSL</button>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div id="picked-rgb" class="font-mono text-xs text-stone-400 mt-1">rgb(103, 232, 249)</div>
+                                                <div id="picked-hsl" class="font-mono text-xs text-stone-400 mt-1">hsl(187, 93%, 69%)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button onclick="randomBaseColor()"
+                                            class="mt-6 w-full h-11 border border-dashed border-stone-300 hover:border-teal-300 transition-colors text-stone-400 hover:text-teal-400 rounded-3xl text-sm flex items-center justify-center gap-x-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                        <span>Random Base Color</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- variations grid - 4 columns x 4 rows -->
+                            <div class="col-span-7">
+                                <div class="flex items-baseline justify-between mb-6">
+                                    <div class="font-medium text-lg">Shades & Tints (16 colors)</div>
+                                    <div class="flex items-center gap-x-6 text-xs">
+                                        <div onclick="switchHarmony(0)" id="harmony-0" class="cursor-pointer border-b border-teal-400 pb-px text-teal-500">Monochrome</div>
+                                        <div onclick="switchHarmony(1)" id="harmony-1" class="cursor-pointer text-stone-400">Analogous</div>
+                                        <div onclick="switchHarmony(2)" id="harmony-2" class="cursor-pointer text-stone-400">Complementary</div>
+                                    </div>
+                                </div>
+
+                                <div id="variations-grid" class="grid grid-cols-4 gap-4">
+                                    <!-- populated dynamically with 16 swatches -->
+                                </div>
+
+                                <div class="mt-10 text-[10px] text-stone-400 flex items-center gap-2">
+                                    <div class="flex-1 h-px bg-gradient-to-r from-transparent to-stone-200"></div>
+                                    Every square is clickable to copy
+                                    <div class="flex-1 h-px bg-gradient-to-l from-transparent to-stone-200"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLENDS -->
+                <div id="page-3" class="hidden max-w-[1200px] mx-auto">
+                    <div class="mb-10">
+                        <div class="inline-flex px-5 py-2 bg-violet-100 text-violet-700 text-xs font-medium rounded-3xl items-center gap-x-2">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-5l1 1m-1-1l1-1M12 3v18m-7-9h14"/></svg>
+                            <span>Curated Gradients</span>
+                        </div>
+                        <h1 class="text-6xl font-semibold tracking-tighter mt-3">Beautiful Blends</h1>
+                        <p class="text-stone-500 max-w-sm">Six harmonious palettes with shiny, natural, and modern gradients. Copy or use them directly.</p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6" id="blends-grid">
+                        <!-- JS populated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- LOGIN OVERLAY -->
+    <div id="login-overlay" class="fixed inset-0 z-50 bg-[#f8f4eb] flex items-center justify-center">
+        <div class="bg-white border border-stone-100 shadow-2xl rounded-3xl p-10 w-full max-w-sm mx-4">
+            <!-- Logo -->
+            <div class="flex justify-center mb-8">
+                <div class="flex items-center gap-x-3">
+                    <div class="relative">
+                        <div class="w-8 h-8 bg-gradient-to-br from-cyan-300 to-violet-300 rounded-2xl shadow-inner flex items-center justify-center">
+                            <div class="w-4 h-4 bg-white rounded-xl rotate-45"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span class="text-4xl font-semibold tracking-[-3px] text-stone-900">color</span>
+                        <span class="text-4xl font-semibold tracking-[-3px] bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-violet-400">picker</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-semibold text-stone-900 text-center mb-1">Welcome back</h2>
+            <p class="text-stone-400 text-sm text-center mb-8">Enter your credentials to continue</p>
+
+            <div class="space-y-4">
+                <div class="relative">
+                    <div class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    </div>
+                    <input type="text" id="login-user" value="admin" placeholder="Username"
+                           class="w-full bg-stone-50 border border-stone-200 rounded-2xl py-3 pl-11 pr-4 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:border-teal-300 focus:ring-1 focus:ring-teal-200 transition">
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    </div>
+                    <input type="password" id="login-pass" value="admin" placeholder="Password"
+                           class="w-full bg-stone-50 border border-stone-200 rounded-2xl py-3 pl-11 pr-4 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:border-teal-300 focus:ring-1 focus:ring-teal-200 transition">
+                </div>
+            </div>
+
+            <button onclick="handleLogin()"
+                    class="mt-6 w-full bg-stone-900 text-white text-sm font-medium h-11 rounded-2xl hover:bg-stone-700 transition-all active:scale-95 flex items-center justify-center gap-x-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                Sign In
+            </button>
+
+            <div id="login-error" class="hidden text-xs text-red-500 text-center mt-3">Invalid username or password</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

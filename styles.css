@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Instrument+Serif:wght@400;600&amp;display=swap');
+
+:root {
+    --accent: 165 243 252;
+}
+
+.swatch {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.swatch:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 40px -15px rgb(165 243 252);
+}
+
+.nav-link {
+    position: relative;
+    transition: color 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.nav-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: rgb(103 232 249);
+    transition: width 0.3s ease;
+}
+
+.nav-link.active:after {
+    width: 100%;
+}
+
+.color-code {
+    font-family: 'Instrument Serif', serif;
+    letter-spacing: -2px;
+}
+
+.light-bg {
+    background: linear-gradient(145deg, #f8f4eb, #f1e9dd);
+}
+
+.glass {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(16px);
+}
